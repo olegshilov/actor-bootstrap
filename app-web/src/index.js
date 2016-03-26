@@ -4,8 +4,18 @@
  */
 
 import { ActorSDK, ActorSDKDelegate } from 'actor-sdk';
+import MessageItem from './components/MessageItem.react';
 
-// Main application config
+const components = {
+  dialog: {
+    messages: {
+      message: MessageItem
+    }
+  }
+};
+const actions = {};
+const l18n = {}
+
 const config = {
   // endpoints: [
   //   'wss://front1-ws-mtproto-api-rev2.actor.im',
@@ -16,47 +26,9 @@ const config = {
   // forceLocale: 'en-US',
   // twitter: 'actorapp',
   // homePage: 'http://actor.im',
-  // appName: 'Actor'
+  // appName: 'Actor',
+  delegate: new ActorSDKDelegate(components, actions, l18n)
 };
 
-// Components overriding
-const components = {
-  // login: null,
-  // install: null,
-  // deactivated: null,
-  // joinGroup: null,
-
-  // sidebar: {
-  //   header: null,
-  //   footer: null
-  // },
-
-  // dialog: {
-  //   toolbar: null,
-  //   compose: null,
-  //   messages: {
-  //    service: null
-  //    text: null
-  //    modern: null
-  //    photo: null
-  //    document: null
-  //    contact: null
-  //    location: null
-  //    voice: null
-  //   }
-  // }
-};
-
-// Actions overriding
-const actions = {
-  // setLoggedIn: null
-  // setLoggedOut: null
-};
-
-// Translation overriding
-const l18n = {}
-
-const delegate = new ActorSDKDelegate(components, actions, l18n);
-
-const app = new ActorSDK({delegate, ...config});
+const app = new ActorSDK({...config});
 app.startApp();
